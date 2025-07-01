@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <style>
+        .submit-btn {
+            height: 50px;
+            width: 200px;
+            margin: 20px auto 0;
+        }
+
+        .login-text {
+            text-align: center;
+        }
+
+        .form-box {
+            max-width: 1200px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 50px;
+            margin-left: 750px;
+            margin-top: 50px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="assets\ExpAnalyzer-Logo.png" alt="ExpAnalyzer-Logo">
+    </div>
+    <div class="container d-flex justify-content-center mt-5">
+        <div class="col-sm-6 mt-5 form-box p-4 rounded">
+            <p class="h2 login-text mb-4">Login to ExpAnalyzer</p>
+            <form>
+                <div class="form-floating mb-4">
+                    <input type="text" class="form-control" placeholder="Username" name="username" required>
+                    <label for="username">Username</label>
+                </div>
+                <div class="form-floating mb-4">
+                    <input type="email" class="form-control" placeholder="Email" name="email" required>
+                    <label for="email">E-Mail</label>
+                </div>
+                <div class="form-floating mb-4">
+                    <input type="password" class="form-control" placeholder="Password" name="password" required>
+                    <label for="password">Password</label>
+                </div>
+                <div class="d-grid">
+                    <a href="home.html" class="btn btn-primary submit-btn">Login</a>
+                </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>
