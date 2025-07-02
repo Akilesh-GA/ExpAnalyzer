@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Currency Converter</title>
+  <link rel="icon" href="assets/Favicon.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="text-center mt-3">
+    <img src="assets/ExpAnalyzer-Logo-Edited.png" alt="ExpAnalyzer Logo" width="250px">
+  </div>
+
+  <h6 class="display-6 text-center mt-4">Currency Converter</h6>
+
+  <div class="mt-5 text-center">
+    <form>
+      <select class="form-select-lg ms-5 mt-4" id="from" title="From">
+        <option>India (Rupees) ₹</option>
+        <option>United States (Dollars) $</option>
+        <option>United Kingdom (Pounds) £</option>
+        <option>European Union (Euros) €</option>
+        <option>Japan (Yen) ¥</option>
+      </select>
+
+      <select class="form-select-lg ms-5 mt-4" id="to" title="To">
+        <option>India (Rupees) ₹</option>
+        <option>United States (Dollars) $</option>
+        <option>United Kingdom (Pounds) £</option>
+        <option>European Union (Euros) €</option>
+        <option>Japan (Yen) ¥</option>
+      </select>
+
+      <br><br>
+      <input type="text" id="amount" class="form-control-lg ms-5 mt-4" placeholder="Enter Amount">
+      <br>
+      <button type="button" class="btn btn-primary mt-4 btn-lg" onclick="displayFrom(); displayTo(); displayAmount(); convertAll();">Convert</button>
+      <br><br>
+
+      <h4><span id="result" class="mt-5"></span></h4>
+      <h4><span id="From" class="mt-5"></span></h4>
+      <h4><span id="To" class="mt-5"></span></h4>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+<script>
+  let result = document.getElementById("result");
+  let From = document.getElementById("From");
+  let To = document.getElementById("To");
+
+  function displayAmount() {
+    let amount = document.getElementById("amount").value;
+    if (amount <= 0 || isNaN(amount)) {
+      result.innerText = "Invalid Input";
+    } else {
+      result.innerText = `Converting...`;
+    }
+  }
+
+  function displayFrom() {
+    let from = document.getElementById("from").value;
+    let closing = 0;
+    let opening = 0;
+    let tempFrom;
+    for(let i=0;i<from.length;i++) {
+        if(from[i] == '(')
+            opening = i+1;
+        if(from[i] == ')') {
+            closing = i;
+            break;
+        }
+    }
+    // console.log(opening);
+    // console.log(closing);
+    if(opening !== -1 && closing !== -1 && opening < closing) {
+        tempFrom = from.substring(opening,closing);
+    }
+    From.innerText = "From : " + tempFrom;
+    return tempFrom;
+  }
+
+  function displayTo() {
+    let to = document.getElementById("to").value;
+    let closing1 = 0;
+    let opening1 = 0;
+    let tempTo;
+    for(let i=0;i<to.length;i++) {
+        if(to[i] == '(')
+            opening1 = i+1;
+        if(to[i] == ')') {
+            closing1 = i;
+            break;
+        }
+    }
+    // console.log(opening);
+    // console.log(closing);
+    if(opening1 !== -1 && closing1 !== -1 && opening1 < closing1) {
+        tempTo = to.substring(opening1,closing1);
+    }
+    To.innerText = "To : " + tempTo;
+    return tempTo;
+  }
+
+  function convertion(tempFrom,tempTo) {
+    // console.log(tempFrom);
+    // console.log(tempTo);
+    let toVal = tempTo.toLowerCase();
+    let fromVal = tempFrom.toLowerCase();
+
+    if(fromVal == "rupees" && toVal == "rupees") {
+
+    }
+    if(fromVal == "dollars" && toVal == "dollars") {
+
+    }
+    if(fromVal == "pounds" && toVal == "pounds") {
+
+    }
+    if(fromVal == "euros" && toVal == "euros") {
+
+    }
+    if(fromVal == "yen" && toVal == "yen") {
+
+    }
+    //
+    if(fromVal == "rupees" && toVal == "dollars") {
+
+    }
+    if(fromVal == "rupees" && toVal == "pounds") {
+
+    }
+    if(fromVal == "rupees" && toVal == "euros") {
+
+    }
+    if(fromVal == "rupees" && toVal == "yen") {
+
+    }
+    //
+    if(fromVal == "dollars" && toVal == "rupees") {
+
+    }
+    if(fromVal == "dollars" && toVal == "pounds") {
+
+    }
+    if(fromVal == "dollars" && toVal == "euros") {
+
+    }
+    if(fromVal == "dollars" && toVal == "yen") {
+
+    }
+    //
+    if(fromVal == "pounds" && toVal == "rupees") {
+
+    }
+    if(fromVal == "pounds" && toVal == "dollars") {
+
+    }
+    if(fromVal == "pounds" && toVal == "euros") {
+
+    }
+    if(fromVal == "pounds" && toVal == "yen") {
+
+    }
+    //
+    if(fromVal == "euros" && toVal == "rupees") {
+
+    }
+    if(fromVal == "euros" && toVal == "dollars") {
+
+    }
+    if(fromVal == "euros" && toVal == "pounds") {
+
+    }
+    if(fromVal == "euros" && toVal == "yen") {
+
+    }
+    //
+    if(fromVal == "yen" && toVal == "rupees") {
+
+    }
+    if(fromVal == "yen" && toVal == "dollars") {
+
+    }
+    if(fromVal == "yen" && toVal == "pounds") {
+
+    }
+    if(fromVal == "yen" && toVal == "euros") {
+
+    }
+  }
+
+  function convertAll() {
+    let tempFrom = displayFrom();
+    let tempTo = displayTo();
+    convertion(tempFrom, tempTo);
+  }
+</script>
