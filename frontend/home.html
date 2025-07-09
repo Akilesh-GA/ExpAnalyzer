@@ -15,74 +15,34 @@
     }
 
     .navbar {
-      position: absolute;
-      width: 100%;
-      z-index: 10;
-    }
-
-    #carousel-section {
-      min-height: 100vh;
-      margin-top: 200px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       background-color: white;
-      padding-top: 150px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
     }
 
-    h2, h3 {
-      font-size: 500px;
+    section {
+      padding: 60px 0;
     }
 
-    .typing {
-    font-family: monospace;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 3px solid black;
-  }
-
-  .typing1 {
-    width: 0;
-    font-size: 2.5rem;
-    animation: typing1 3s steps(26, end) forwards, blink 0.75s step-end infinite;
-  }
-
-  .typing2 {
-    margin-top: 30px;
-    font-size: 2.2rem;
-    opacity: 0;
-    animation: fadeIn 1s ease-in-out 3.2s forwards;
-  }
-
-  @keyframes typing1 {
-    to {
-      width: 26ch;
+    li:hover {
+      text-decoration: underline;
+      color: gold;
     }
-  }
 
-  @keyframes blink {
-    50% {
-      border-color: transparent;
+    .welcome-text:hover {
+      color: gold;
     }
-  }
-
-  @keyframes fadeIn {
-    to {
-      opacity: 1;
-    }
-  }
-
   </style>
 </head>
 <body>
 
   <nav class="navbar">
-    <div class="container-fluid d-flex align-items-center">
-      <a class="nav-brand ms-3 mt-2">
-        <img src="assets\ExpAnalyzer-Logo-Edited.png" alt="ExpAnalyzer-logo" width="200">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+      <a class="navbar-brand ms-3">
+        <img src="assets/ExpAnalyzer-Logo-Edited.png" alt="ExpAnalyzer-logo" width="180">
       </a>
-      <ul class="navbar-nav me-5 mt-1 flex-row gap-5">
+      <ul class="navbar-nav me-5 flex-row gap-4">
         <li class="nav-item"><a class="nav-link fs-5" href="dashboard.html">Dashboard</a></li>
         <li class="nav-item"><a class="nav-link fs-5" href="converter.html">Converter</a></li>
         <li class="nav-item"><a class="nav-link fs-5" href="addexpense.html">Add Expense</a></li>
@@ -94,20 +54,40 @@
     </div>
   </nav>
 
-  <section id="carousel-section">
-    <h2 class="text-center typing typing1">Welcome to ExpAnalyzer !</h2>
-    <h3 class="text-center typing2">Plan . Organise . Analyse . Grow</h3>
+  <section class="bg-white w-100" style="min-height: 750px;">
+    <div class="container text-center py-5 mt-5">
+      <h1 class="display-5 fw-semibold mb-3 mt-5 welcome-text">Welcome to ExpAnalyzer!</h1>
+      <h2 class="fs-4 text-muted mt-3">Plan . Organise . Analyse . Grow</h2>
+    </div>
   </section>
 
-    <footer class="bg-dark">
-    <section>
-      <h3 class="text-light display-3 fs-5 ms-5 p-2 pt-5"> <u>  Contact Details </u> </h3>
-      <h4 class="text-light display-4 fs-5 ms-5 p-2"> <img title="icon" src="assets/mail.png" height="25px" width="25px" class="rounded-circle"> <i> mail </i> : admin@gmail.com</h3>
-      <h4 class="text-light display-4 fs-5 ms-5 p-2"> <img title="icon" src="assets/website.png" height="25px" width="25px" class="rounded-circle"> <i> website </i> : www.expanalyzer.com </h3>
-      <h4 class="text-light display-4 fs-5 ms-5 p-2"> <img title="icon" src="assets/phone.png" height="25px" width="25px" class="rounded-circle"> <i> contact </i> : +91 12345 67890</h3>
-      <h4 class="text-light display-4 fs-5 ms-5 p-2 pb-5"> <img title="icon" src="assets/address.png" height="25px" width="25px" class="rounded-circle"> <i> Address </i> : ABC street, Tiruppur, Tamil Nadu</h3>
-      <p class="text-center text-light fs-5 pb-4"> Copyright © All rights reserved  </p>
-    </section>
+
+  <footer class="bg-dark text-light mt-5">
+    <div class="container py-5">
+      <h4 class="mb-4"><u>Contact Details</u></h4>
+
+      <div class="mb-3 d-flex align-items-center">
+        <img src="assets/mail.png" height="25" width="25" class="me-2 rounded-circle" alt="mail icon">
+        <span><strong>Mail:</strong> admin@gmail.com</span>
+      </div>
+
+      <div class="mb-3 d-flex align-items-center">
+        <img src="assets/website.png" height="25" width="25" class="me-2 rounded-circle" alt="website icon">
+        <span><strong>Website:</strong> www.expanalyzer.com</span>
+      </div>
+
+      <div class="mb-3 d-flex align-items-center">
+        <img src="assets/phone.png" height="25" width="25" class="me-2 rounded-circle" alt="phone icon">
+        <span><strong>Contact:</strong> +91 12345 67890</span>
+      </div>
+
+      <div class="mb-3 d-flex align-items-center">
+        <img src="assets/address.png" height="25" width="25" class="me-2 rounded-circle" alt="address icon">
+        <span><strong>Address:</strong> ABC Street, Tiruppur, Tamil Nadu</span>
+      </div>
+
+      <p class="text-center mt-4 mb-0">© All rights reserved</p>
+    </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 </body>
