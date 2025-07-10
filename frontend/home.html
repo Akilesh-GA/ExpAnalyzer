@@ -5,13 +5,14 @@
   <link rel="icon" href="assets/Favicon.png" type="image/png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body, html {
       margin: 0;
       padding: 0;
       scroll-behavior: smooth;
       overflow-x: hidden;
+      font-family: 'Segoe UI', sans-serif;
     }
 
     .navbar {
@@ -19,15 +20,16 @@
       top: 0;
       z-index: 1000;
       background-color: white;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-nav .nav-link:hover {
+      text-decoration: underline;
+      color: #ffc107;
     }
 
     section {
       padding: 60px 0;
-    }
-
-    li:hover {
-      text-decoration: underline;
-      color: gold;
     }
 
     .welcome-text:hover {
@@ -36,12 +38,36 @@
 
     .welcome-section {
       min-height: 750px;
+      background: linear-gradient(to bottom right, blue, darkblue);
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+
+    .footer-icon {
+      height: 25px;
+      width: 25px;
+      margin-right: 10px;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    footer span {
+      font-size: 1rem;
+    }
+
+    footer {
+      background-color: black;
     }
   </style>
 </head>
 <body>
 
-  <nav class="navbar">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md">
     <div class="container-fluid d-flex align-items-center justify-content-between">
       <a class="navbar-brand ms-3">
         <img src="assets/ExpAnalyzer-Logo-Edited.png" alt="ExpAnalyzer-logo" width="180">
@@ -58,41 +84,44 @@
     </div>
   </nav>
 
-  <section class="bg-white w-100 welcome-section">
-    <div class="container text-center py-5 mt-5">
-      <h1 class="display-5 fw-semibold mb-3 mt-5 welcome-text">Welcome to ExpAnalyzer!</h1>
-      <h2 class="fs-4 text-muted mt-3">Plan . Organise . Analyse . Grow</h2>
+  <!-- Welcome Section -->
+  <section class="welcome-section text-center text-white">
+    <div class="container py-5">
+      <h1 class="display-4 fw-bold welcome-text">Welcome to ExpAnalyzer!</h1>
+      <p class="lead mt-3 text-light">Plan · Organise · Analyse · Grow</p>
     </div>
   </section>
 
-
-  <footer class="bg-dark text-light mt-5">
+  <!-- Footer -->
+  <footer class="text-light">
     <div class="container py-5">
       <h4 class="mb-4"><u>Contact Details</u></h4>
 
       <div class="mb-3 d-flex align-items-center">
-        <img src="assets/mail.png" height="25" width="25" class="me-2 rounded-circle" alt="mail icon">
+        <img src="assets/mail.png" class="footer-icon rounded-circle" alt="mail icon">
         <span><strong>Mail:</strong> admin@gmail.com</span>
       </div>
 
       <div class="mb-3 d-flex align-items-center">
-        <img src="assets/website.png" height="25" width="25" class="me-2 rounded-circle" alt="website icon">
+        <img src="assets/website.png" class="footer-icon rounded-circle" alt="website icon">
         <span><strong>Website:</strong> www.expanalyzer.com</span>
       </div>
 
       <div class="mb-3 d-flex align-items-center">
-        <img src="assets/phone.png" height="25" width="25" class="me-2 rounded-circle" alt="phone icon">
+        <img src="assets/phone.png" class="footer-icon rounded-circle" alt="phone icon">
         <span><strong>Contact:</strong> +91 12345 67890</span>
       </div>
 
       <div class="mb-3 d-flex align-items-center">
-        <img src="assets/address.png" height="25" width="25" class="me-2 rounded-circle" alt="address icon">
+        <img src="assets/address.png" class="footer-icon rounded-circle" alt="address icon">
         <span><strong>Address:</strong> ABC Street, Tiruppur, Tamil Nadu</span>
       </div>
 
-      <p class="text-center mt-4 mb-0">© All rights reserved</p>
+      <p class="text-center mt-4 mb-0">© All rights reserved | ExpAnalyzer</p>
     </div>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
