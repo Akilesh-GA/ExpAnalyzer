@@ -54,34 +54,32 @@
     }
 
     .welcome-section {
-      margin-top: 75px;
-      min-height: 500px;
-      background: url("assets/temp-bg.png") no-repeat center center;
-      background-size: cover;
-      align-items: center;
-      color: white;
-    }
-
-    /* .welcome-section {
-      min-height: 750px;
-      background: linear-gradient(to bottom right, blue, darkblue);
+      min-height: 700px;
+      background: url("assets/background.png") no-repeat center center;
+      background-size: 70% auto;
+      background-position: center;
       display: flex;
       align-items: center;
       color: white;
-    } */
+    }
 
     .about-container {
       min-height: 750px;
     }
 
     .carousel-card {
-      width: 400px;
-      height: 200px;
+      width: 300px;
+      height: 300px;
     }
 
     .carousel-card img {
       height: 100%;
       object-fit: contain;
+    }
+
+    .about-section {
+      background-color: rgb(33, 189, 33);
+      color: black;
     }
 
     .footer-icon {
@@ -123,24 +121,24 @@
   </nav>
 
   <main>
-    <section class="welcome-section text-center text-white">
+    <section class="welcome-section text-center text-dark">
       <div class="container py-5">
         <h1 class="display-4 fw-bold welcome-text">Welcome to ExpAnalyzer!</h1>
-        <p class="lead mt-3 text-light">Plan · Organise · Analyse · Grow</p>
+        <p class="lead display-5 mt-5 text-dark">Plan · Organise · Analyse · Grow</p>
       </div>
     </section>
 
-    <section class="bg-white text-dark py-5">
+    <section class="py-5 about-section">
       <section class="container about-container">
-        <h2 class="text-center mb-4">About Unified Mentor</h2>
+        <h2 class="text-center text-light mb-4">About Unified Mentor</h2>
 
         <div class="mb-5">
-          <h4 class="text-primary">Vision</h4>
+          <h4 class="text-light">Vision</h4>
           <p><strong>Leadership through Global Talent Development:</strong> This indicates a focus on fostering leadership skills and developing talent on a global scale through their programs.</p>
         </div>
 
         <div class="mb-5">
-          <h4 class="text-primary">Mission</h4>
+          <h4 class="text-light">Mission</h4>
           <ul class="list-unstyled">
             <li><strong>Enhance Employability:</strong> Unified Mentor's core purpose is to improve individuals' job prospects by equipping them with the skills and knowledge needed in the job market.</li>
             <li><strong>Personalized Skill Development Programs:</strong> They achieve this by offering tailored training and development opportunities that cater to individual needs and career goals.</li>
@@ -148,7 +146,7 @@
         </div>
 
         <div>
-          <h4 class="text-primary">Our Values</h4>
+          <h4 class="text-light">Our Values</h4>
           <ul class="list-unstyled row">
             <li class="col-md-6 mb-3"><strong>Empowering Futures through Knowledge:</strong> Providing transformative education to help individuals thrive in a changing world.</li>
             <li class="col-md-6 mb-3"><strong>Utilizing Most Effective Training Methods:</strong> Ensuring the delivery of high-quality, impactful training.</li>
@@ -163,28 +161,35 @@
               <div class="carousel-item active">
                 <div class="card carousel-card">
                   <div class="card-body">
-                    <img src="assets/mail.png" class="img-fluid" alt="image-1">
+                    <a href="dashboard.html"><img src="assets/dashboard-image.png" class="img-fluid" alt="image-1"></a>
                   </div>
                 </div>
               </div>
               <div class="carousel-item">
                 <div class="card carousel-card">
                   <div class="card-body">
-                    <img src="assets/mail.png" class="img-fluid" alt="image-2">
+                    <a href="converter.html"><img src="assets/converter-image.png" class="img-fluid" alt="image-2"></a>
                   </div>
                 </div>
               </div>
               <div class="carousel-item">
                 <div class="card carousel-card">
                   <div class="card-body">
-                    <img src="assets/mail.png" class="img-fluid" alt="image-3">
+                    <a href="addexpense.html"><img src="assets/add-expense-image.png" class="img-fluid" alt="image-3"></a>
                   </div>
                 </div>
               </div>
               <div class="carousel-item">
                 <div class="card carousel-card">
                   <div class="card-body">
-                    <img src="assets/mail.png" class="img-fluid" alt="image-4">
+                    <a href="plans.html"><img src="assets/plans-image.png" class="img-fluid" alt="image-4"></a>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="card carousel-card">
+                  <div class="card-body">
+                    <a href="payments.html"><img src="assets/payments-image.png" class="img-fluid" alt="image-4"></a>
                   </div>
                 </div>
               </div>
@@ -206,19 +211,19 @@
       <h4 class="mb-4"><u>Contact Details</u></h4>
       <div class="mb-3 d-flex align-items-center">
         <img src="assets/mail.png" class="footer-icon rounded-circle" alt="mail icon">
-        <span><strong>Mail:</strong> admin@gmail.com</span>
+        <span><strong>Mail:</strong> hello@unifiedmentor.com</span>
       </div>
       <div class="mb-3 d-flex align-items-center">
         <img src="assets/website.png" class="footer-icon rounded-circle" alt="website icon">
-        <span><strong>Website:</strong> www.expanalyzer.com</span>
+        <span><strong>Website:</strong> www.unifiedmentor.com</span>
       </div>
       <div class="mb-3 d-flex align-items-center">
         <img src="assets/phone.png" class="footer-icon rounded-circle" alt="phone icon">
-        <span><strong>Contact:</strong> +91 12345 67890</span>
+        <span><strong>Contact:</strong> +91 62838 00330</span>
       </div>
       <div class="mb-3 d-flex align-items-center">
         <img src="assets/address.png" class="footer-icon rounded-circle" alt="address icon">
-        <span><strong>Address:</strong> ABC Street, Tiruppur, Tamil Nadu</span>
+        <span><strong>Address:</strong> DLF Phase 3, Gurugram, Haryana </span>
       </div>
       <p class="text-center mt-4 mb-0">© All rights reserved | ExpAnalyzer</p>
     </div>
