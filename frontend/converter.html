@@ -7,90 +7,95 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
     body {
-    background-color: #ffffff;
-    font-family: 'Segoe UI', sans-serif;
-  }
+      background: linear-gradient(to bottom right, #0d6efd, #0a58ca);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
 
-  .container-converter {
-    background-color: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-    padding: 50px 40px;
-    max-width: 650px;
-    margin: 40px auto;
-    transition: all 0.3s ease;
-  }
+    .container-converter {
+      background-color: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+      padding: 50px 40px;
+      max-width: 650px;
+      width: 100%;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
 
-  .container-converter:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(13, 110, 253, 0.3);
-  }
+    .container-converter:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px darkblue;
+    }
 
-  .form-select-lg,
-  .form-control-lg {
-    border-radius: 12px;
-    width: 75%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    transition: border-color 0.3s ease;
-  }
-
-  .form-select-lg:focus,
-  .form-control-lg:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 5px rgba(13, 110, 253, 0.3);
-    outline: none;
-  }
-
-  .btn-lg {
-    border-radius: 10px;
-    padding: 10px 30px;
-    background-color: #0d6efd;
-    border: none;
-    transition: background-color 0.3s ease;
-  }
-
-  .btn-lg:hover {
-    background-color: #0b5ed7;
-  }
-
-  .form-section {
-    margin-top: 30px;
-  }
-
-  #result,
-  #From,
-  #To {
-    font-weight: 600;
-    color: black;
-    margin-top: 10px;
-  }
-
-  h2 {
-    font-weight: 700;
-    color: #343a40;
-  }
-
-  @media screen and (max-width: 768px) {
     .form-select-lg,
     .form-control-lg {
-      width: 100%;
+      border-radius: 12px;
+      width: 75%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      transition: border-color 0.3s ease;
     }
 
-    .row .col-md-5 {
-      margin-bottom: 15px;
+    .form-select-lg:focus,
+    .form-control-lg:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 5px rgba(13, 110, 253, 0.3);
+      outline: none;
     }
-  }
+
+    .btn-lg {
+      border-radius: 10px;
+      padding: 10px 30px;
+      background-color: #0d6efd;
+      border: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-lg:hover {
+      background-color: #0b5ed7;
+    }
+
+    .form-section {
+      margin-top: 30px;
+    }
+
+    #result,
+    #From,
+    #To {
+      font-weight: 600;
+      color: black;
+      margin-top: 10px;
+    }
+
+    h2 {
+      font-weight: 700;
+      color: #343a40;
+    }
+
+    @media screen and (max-width: 768px) {
+      .form-select-lg,
+      .form-control-lg {
+        width: 100%;
+      }
+      .row .col-md-5 {
+        margin-bottom: 15px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <div class="text-center mt-3">
-    <img src="assets/ExpAnalyzer-Logo-Edited.png" alt="ExpAnalyzer Logo" width="250px">
-  </div>
-
-  <div class="container-converter text-center">
+  <div class="container-converter">
     <h2 class="mb-4">💱 Currency Converter</h2>
 
     <form>
@@ -128,212 +133,59 @@
       <div class="form-section">
         <h4><span id="result" class="mt-3 d-block"></span></h4>
       </div>
-
     </form>
   </div>
+
+  <script>
+    const resultDisplay = document.getElementById("result");
+
+    function displayAmount() {
+      let amount = parseFloat(document.getElementById("amount").value);
+      if (amount <= 0 || isNaN(amount)) {
+        resultDisplay.innerText = "Invalid Input";
+        return false;
+      }
+      return amount;
+    }
+
+    function getCurrencyCode(text) {
+      let start = text.indexOf("(") + 1;
+      let end = text.indexOf(")");
+      return text.substring(start, end).toLowerCase();
+    }
+
+    function getConversionRate(from, to) {
+      const rates = {
+        rupees:  { rupees: 1, dollars: 0.012, pounds: 0.0086, euros: 0.0099, yen: 1.69 },
+        dollars: { rupees: 85.48, dollars: 1, pounds: 0.73, euros: 0.85, yen: 144.51 },
+        pounds:  { rupees: 116.65, dollars: 1.36, pounds: 1, euros: 1.16, yen: 197.24 },
+        euros:   { rupees: 100.64, dollars: 1.18, pounds: 0.86, euros: 1, yen: 170.09 },
+        yen:     { rupees: 0.59, dollars: 0.0069, pounds: 0.0051, euros: 0.0059, yen: 1 }
+      };
+      return rates[from]?.[to] ?? null;
+    }
+
+    function convertAll() {
+      let amount = displayAmount();
+      if (!amount) return;
+
+      let fromCurrencyText = document.getElementById("from").value;
+      let toCurrencyText = document.getElementById("to").value;
+
+      let fromCurrency = getCurrencyCode(fromCurrencyText);
+      let toCurrency = getCurrencyCode(toCurrencyText);
+
+      let rate = getConversionRate(fromCurrency, toCurrency);
+
+      if (rate !== null) {
+        let converted = amount * rate;
+        resultDisplay.innerText = `Converted Amount : ${converted.toFixed(2)} ${toCurrency.toUpperCase()}`;
+      } else {
+        resultDisplay.innerText = "Conversion rate not available.";
+      }
+    }
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<script>
-  const resultDisplay = document.getElementById("result");
-
-  function displayAmount() {
-    let amount = parseFloat(document.getElementById("amount").value);
-    if (amount <= 0 || isNaN(amount)) {
-      resultDisplay.innerText = "Invalid Input";
-      return false;
-    }
-    return amount;
-  }
-
-  function getCurrencyCode(text) {
-    let start = text.indexOf("(") + 1;
-    let end = text.indexOf(")");
-    return text.substring(start, end).toLowerCase();
-  }
-
-  function getConversionRate(from, to) {
-    const rates = {
-      rupees:     { rupees: 1, dollars: 0.012, pounds: 0.0086, euros: 0.0099, yen: 1.69 },
-      dollars:    { rupees: 85.48, dollars: 1, pounds: 0.73, euros: 0.85, yen: 144.51 },
-      pounds:     { rupees: 116.65, dollars: 1.36, pounds: 1, euros: 1.16, yen: 197.24 },
-      euros:      { rupees: 100.64, dollars: 1.18, pounds: 0.86, euros: 1, yen: 170.09 },
-      yen:        { rupees: 0.59, dollars: 0.0069, pounds: 0.0051, euros: 0.0059, yen: 1 }
-    };
-    return rates[from]?.[to] ?? null;
-  }
-
-  function convertAll() {
-    let amount = displayAmount();
-    if (!amount) return;
-
-    let fromCurrencyText = document.getElementById("from").value;
-    let toCurrencyText = document.getElementById("to").value;
-
-    let fromCurrency = getCurrencyCode(fromCurrencyText);
-    let toCurrency = getCurrencyCode(toCurrencyText);
-
-    let rate = getConversionRate(fromCurrency, toCurrency);
-
-    if (rate !== null) {
-      let converted = amount * rate;
-      resultDisplay.innerText = `Converted Amount : ${converted.toFixed(2)} ${toCurrency.toUpperCase()}`;
-    } else {
-      resultDisplay.innerText = "Conversion rate not available.";
-    }
-  }
-</script>
-
-<!-- <script>
-  let result = document.getElementById("result");
-  let From = document.getElementById("From");
-  let To = document.getElementById("To");
-
-  function displayAmount() {
-    let amount = document.getElementById("amount").value;
-    if (amount <= 0 || isNaN(amount)) {
-      result.innerText = "Invalid Input";
-    } else {
-      result.innerText = `Converting...`;
-    }
-  }
-
-  function displayFrom() {
-    let from = document.getElementById("from").value;
-    let closing = 0;
-    let opening = 0;
-    let tempFrom;
-    for(let i=0;i<from.length;i++) {
-        if(from[i] == '(')
-            opening = i+1;
-        if(from[i] == ')') {
-            closing = i;
-            break;
-        }
-    }
-    // console.log(opening);
-    // console.log(closing);
-    if(opening !== -1 && closing !== -1 && opening < closing) {
-        tempFrom = from.substring(opening,closing);
-    }
-    From.innerText = "From : " + tempFrom;
-    return tempFrom;
-  }
-
-  function displayTo() {
-    let to = document.getElementById("to").value;
-    let closing1 = 0;
-    let opening1 = 0;
-    let tempTo;
-    for(let i=0;i<to.length;i++) {
-        if(to[i] == '(')
-            opening1 = i+1;
-        if(to[i] == ')') {
-            closing1 = i;
-            break;
-        }
-    }
-    // console.log(opening);
-    // console.log(closing);
-    if(opening1 !== -1 && closing1 !== -1 && opening1 < closing1) {
-        tempTo = to.substring(opening1,closing1);
-    }
-    To.innerText = "To : " + tempTo;
-    return tempTo;
-  }
-
-  function convertion(tempFrom,tempTo) {
-    // console.log(tempFrom);
-    // console.log(tempTo);
-    let toVal = tempTo.toLowerCase();
-    let fromVal = tempFrom.toLowerCase();
-
-    if(fromVal == "rupees" && toVal == "rupees") {
-      result = result;
-    }
-    if(fromVal == "dollars" && toVal == "dollars") {
-      result = result;
-    }
-    if(fromVal == "pounds" && toVal == "pounds") {
-      result = result;
-    }
-    if(fromVal == "euros" && toVal == "euros") {
-      result = result;
-    }
-    if(fromVal == "yen" && toVal == "yen") {
-      result = result;
-    }
-    //
-    if(fromVal == "rupees" && toVal == "dollars") {
-      result *= 0.012;
-    }
-    if(fromVal == "rupees" && toVal == "pounds") {
-      result *= 0.0086;
-    }
-    if(fromVal == "rupees" && toVal == "euros") {
-      result *= 0.0099;
-    }
-    if(fromVal == "rupees" && toVal == "yen") {
-      result *= 1.69;
-    }
-    //
-    if(fromVal == "dollars" && toVal == "rupees") {
-      result *= 85.48;
-    }
-    if(fromVal == "dollars" && toVal == "pounds") {
-      result *= 0,73;
-    }
-    if(fromVal == "dollars" && toVal == "euros") {
-      result *= 0.85;
-    }
-    if(fromVal == "dollars" && toVal == "yen") {
-      result *= 144.51;
-    }
-    //
-    if(fromVal == "pounds" && toVal == "rupees") {
-      result *= 116.65;
-    }
-    if(fromVal == "pounds" && toVal == "dollars") {
-      result *= 1.36;
-    }
-    if(fromVal == "pounds" && toVal == "euros") {
-      result *= 1.16;
-    }
-    if(fromVal == "pounds" && toVal == "yen") {
-      result *= 197.24;
-    }
-    //
-    if(fromVal == "euros" && toVal == "rupees") {
-      result *= 100.64;
-    }
-    if(fromVal == "euros" && toVal == "dollars") {
-      result *= 1.18;
-    }
-    if(fromVal == "euros" && toVal == "pounds") {
-      result *= 0.86;
-    }
-    if(fromVal == "euros" && toVal == "yen") {
-      result *= 170.09;
-    }
-    //
-    if(fromVal == "yen" && toVal == "rupees") {
-      result *= 0.59;
-    }
-    if(fromVal == "yen" && toVal == "dollars") {
-      result *= 0.0069;
-    }
-    if(fromVal == "yen" && toVal == "pounds") {
-      result *= 0.0051;
-    }
-    if(fromVal == "yen" && toVal == "euros") {
-      result *= 0.0059;
-    }
-  }
-
-  function convertAll() {
-    let tempFrom = displayFrom();
-    let tempTo = displayTo();
-    convertion(tempFrom, tempTo);
-  }
-</script> -->
