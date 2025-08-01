@@ -157,5 +157,81 @@
     </form>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  // Generate CAPTCHA
+  const captchaQuestion = document.getElementById('captchaQuestion');
+  const captchaInput = document.getElementById('captchaInput');
+  const captchaError = document.getElementById('captchaError');
+
+  // Generate random captcha
+  let num1 = Math.floor(Math.random() * 10);
+  let num2 = Math.floor(Math.random() * 10);
+  let captchaAnswer = num1 + num2;
+  captchaQuestion.textContent = `${num1} + ${num2} = ?`;
+
+  function validateCaptcha(event) {
+    event.preventDefault(); // prevent default form submit
+
+    // Get field values
+    const username = document.getElementById('username').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const dob = document.getElementById('dob').value;
+    const genderMale = document.getElementById('male').checked;
+    const genderFemale = document.getElementById('female').checked;
+    const captchaEntered = parseInt(captchaInput.value);
+
+    // Email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Validation
+    if (username === '') {
+      alert("Please enter a username.");
+      return false;
+    }
+
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return false;
+    }
+
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters.");
+      return false;
+    }
+
+    if (!genderMale && !genderFemale) {
+      alert("Please select your gender.");
+      return false;
+    }
+
+    if (!dob) {
+      alert("Please select your date of birth.");
+      return false;
+    }
+
+    const dobDate = new Date(dob);
+    const today = new Date();
+    if (dobDate >= today) {
+      alert("Date of birth must be in the past.");
+      return false;
+    }
+
+    if (isNaN(captchaEntered) || captchaEntered !== captchaAnswer) {
+      captchaError.style.display = 'block';
+      captchaInput.classList.add("is-invalid");
+      return false;
+    } else {
+      captchaError.style.display = 'none';
+      captchaInput.classList.remove("is-invalid");
+    }
+
+    // If all validations pass
+    alert("Sign-in successful!");
+    // Redirect or process form
+    // window.location.href = "home.html"; // Uncomment if needed
+    return true;
+  }
+</script>
 </body>
 </html>

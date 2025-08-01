@@ -1,27 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<link>
   <title>Add Expenses</title>
   <link rel="icon" href="assets/Favicon.png" type="image/png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
-    crossorigin="anonymous"
-  >
-  
+    rel="stylesheet"></link>
   <style>
     body {
       background: linear-gradient(to bottom right, #0d6efd, #0a58ca);
       min-height: 100vh;
-      margin: 0;
       font-family: Arial, sans-serif;
+      color: #fff;
+      padding: 30px 15px;
+    }
+
+    .form-container {
+      background-color: #ffffff;
+      color: #212529;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      max-width: 700px;
+      margin: auto;
     }
 
     h3 {
       font-weight: bold;
+    }
+
+    .table-container {
+      margin-top: 40px;
     }
 
     .table {
@@ -32,9 +43,38 @@
   </style>
 </head>
 <body>
-  <section class="container mt-5">
-    <h3 class="text-center mb-4 text-dark">User Expense Summary</h3>
-    <div class="table-responsive mt-5">
+
+  <div class="form-container">
+    <h3 class="text-center mb-4 text-primary">Add New Expense</h3>
+    <form id="expenseForm">
+      <div class="row g-3">
+        <div class="col-md-3">
+          <input title="input" type="date" class="form-control" id="date" required>
+        </div>
+        <div class="col-md-3">
+          <input type="text" class="form-control" id="category" placeholder="Category" required>
+        </div>
+        <div class="col-md-3">
+          <input type="number" class="form-control" id="amount" placeholder="Amount (₹)" required>
+        </div>
+        <div class="col-md-3">
+          <select title="select" class="form-select" id="paymentMode" required>
+            <option value="" disabled selected>Payment Mode</option>
+            <option value="UPI">UPI</option>
+            <option value="Cash">Cash</option>
+            <option value="Card">Card</option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-4 d-grid">
+        <button type="submit" class="btn btn-primary">Add Expense</button>
+      </div>
+    </form>
+  </div>
+
+  <section class="container table-container">
+    <h3 class="text-center mb-4 text-white">User Expense Summary</h3>
+    <div class="table-responsive">
       <table class="table table-bordered table-hover text-center align-middle">
         <thead class="table-dark">
           <tr>
@@ -44,47 +84,71 @@
             <th>Payment Mode</th>
           </tr>
         </thead>
-        <tbody>
-          <tr class="table-success">
-            <td>2025-07-05</td>
-            <td>Groceries</td>
-            <td>1,200</td>
-            <td>UPI</td>
-          </tr>
-          <tr class="table-primary">
-            <td>2025-07-06</td>
-            <td>Transport</td>
-            <td>350</td>
-            <td>Cash</td>
-          </tr>
-          <tr class="table-secondary">
-            <td>2025-07-08</td>
-            <td>Utilities</td>
-            <td>2,000</td>
-            <td>Card</td>
-          </tr>
-          <tr class="table-light">
-            <td>2025-07-09</td>
-            <td>Dining</td>
-            <td>800</td>
-            <td>UPI</td>
-          </tr>
-          <tr class="table-warning">
-            <td>2025-07-10</td>
-            <td>Entertainment</td>
-            <td>1,500</td>
-            <td>Card</td>
-          </tr>
-          <tr class="table-danger">
-            <td>2025-07-11</td>
-            <td>Fuel</td>
-            <td>1,000</td>
-            <td>Cash</td>
-          </tr>
+        <tbody id="expenseTableBody">
         </tbody>
       </table>
     </div>
   </section>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const form = document.getElementById('expenseForm');
+    const tableBody = document.getElementById('expenseTableBody');
+
+    let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+
+    function saveExpenses() {
+      localStorage.setItem('expenses', JSON.stringify(expenses));
+    }
+
+    function getRowClass(category) {
+      const classes = {
+        'Groceries': 'table-success',
+        'Transport': 'table-primary',
+        'Utilities': 'table-secondary',
+        'Dining': 'table-light',
+        'Entertainment': 'table-warning',
+        'Fuel': 'table-danger'
+      };
+      return classes[category] || '';
+    }
+
+    function renderExpenses() {
+      tableBody.innerHTML = "";
+      expenses.forEach(exp => {
+        const row = document.createElement('tr');
+        row.className = getRowClass(exp.category);
+        row.innerHTML = `
+          <td>${exp.date}</td>
+          <td>${exp.category}</td>
+          <td>${parseInt(exp.amount).toLocaleString()}</td>
+          <td>${exp.paymentMode}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const date = document.getElementById('date').value;
+      const category = document.getElementById('category').value.trim();
+      const amount = document.getElementById('amount').value;
+      const paymentMode = document.getElementById('paymentMode').value;
+
+      if (!date || !category || !amount || !paymentMode) {
+        alert('Please fill all fields.');
+        return;
+      }
+
+      const newExpense = { date, category, amount, paymentMode };
+      expenses.push(newExpense);
+      saveExpenses();
+      renderExpenses();
+      form.reset();
+    });
+
+    renderExpenses();
+  </script>
 </body>
 </html>

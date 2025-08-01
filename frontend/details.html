@@ -1,13 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title> Payment Details</title>
+  <title>Payment Details</title>
   <link rel="icon" href="assets/Favicon.png" type="image/png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #0d6efd, #001f5c);
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 30px;
+    }
+
+    .form-container {
+      background-color: #fff;
+      color: #212529;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .form-title {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: #0d6efd;
+    }
+
+    .btn-primary {
+      font-weight: bold;
+      height: 50px;
+      border-radius: 10px;
+    }
+
+    .btn-primary:hover {
+      background-color: #084cdf;
+    }
+  </style>
 </head>
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+  <div class="form-container">
+    <h2 class="form-title">Enter Payment Details</h2>
+    <form id="paymentForm">
+      <div class="mb-3">
+        <label for="accountHolder" class="form-label">Account Holder Name</label>
+        <input type="text" class="form-control" id="accountHolder" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="accountNumber" class="form-label">Account Number</label>
+        <input type="text" class="form-control" id="accountNumber" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="bankName" class="form-label">Bank Name</label>
+        <input type="text" class="form-control" id="bankName" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="ifsc" class="form-label">IFSC Code</label>
+        <input type="text" class="form-control" id="ifsc" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="branch" class="form-label">Branch Name</label>
+        <input type="text" class="form-control" id="branch" required>
+      </div>
+
+      <div class="mb-4">
+        <label for="upi" class="form-label">UPI ID (optional)</label>
+        <input type="text" class="form-control" id="upi">
+      </div>
+
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">Submit Payment Details</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('paymentForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const accountHolder = document.getElementById('accountHolder').value.trim();
+      const accountNumber = document.getElementById('accountNumber').value.trim();
+      const bankName = document.getElementById('bankName').value.trim();
+      const ifsc = document.getElementById('ifsc').value.trim();
+      const branch = document.getElementById('branch').value.trim();
+
+      // Simple validations
+      if (accountHolder === '' || accountNumber === '' || bankName === '' || ifsc === '' || branch === '') {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      if (!/^\d{9,18}$/.test(accountNumber)) {
+        alert('Account Number must be 9-18 digits.');
+        return;
+      }
+
+      if (!/^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifsc)) {
+        alert('Enter a valid IFSC code (e.g., SBIN0001234).');
+        return;
+      }
+
+      alert('Payment details submitted successfully!');
+      // You can add logic to store or send data here
+      // Example: Send to server using fetch()
+    });
+  </script>
 </body>
 </html>
